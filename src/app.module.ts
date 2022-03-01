@@ -7,10 +7,14 @@ import { ImageUtils } from "./common/lib/image-utils";
 import { PersonModule } from "./modules/person/person.module";
 import { ConfigModule } from '@nestjs/config';
 import { CompanyModule } from "./modules/company/company.module";
+import { PasswordModule } from "./modules/password/password.module";
+import { ProjectModule } from "./modules/project/project.module";
 
 
 @Module({
   imports: [
+    ProjectModule,
+    PasswordModule,
     CompanyModule,
     //To use .env variables
     ConfigModule.forRoot({

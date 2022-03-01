@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { FileSchema } from "./file.schema";
 import mongoose, { Document } from "mongoose";
 import { Person } from "./person.schema";
+import { Project } from "./project.schema";
 
 
 
@@ -24,7 +25,7 @@ export class Company {
   @Prop()
   logo:FileSchema
 
-  @Prop()
+  @Prop([{type:mongoose.Schema.Types.ObjectId,ref:Project.name}])
   projects:[string]
 
 }

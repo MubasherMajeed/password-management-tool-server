@@ -26,6 +26,9 @@ export class Person extends User {
 
   @Prop({ default: false })
   is_verified: boolean;
+
+  @Prop()
+  scopes: [string];
 }
 
 export const PersonSchema = SchemaFactory.createForClass(Person);

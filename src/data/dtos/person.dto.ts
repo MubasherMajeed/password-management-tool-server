@@ -26,6 +26,11 @@ export class PersonUpdateRequest {
   @IsOptional()
   @ApiProperty()
   image: FileDTO;
+
+
+  @IsOptional()
+  @ApiProperty({type:[String]})
+  scopes: [string];
 }
 
 export class PersonResponse {
@@ -49,6 +54,9 @@ export class PersonResponse {
 
   @ApiProperty()
   verification_hash: string;
+
+  @ApiProperty({type:[String]})
+  scopes: [string];
 }
 
 export class PasswordUpdateRequest {

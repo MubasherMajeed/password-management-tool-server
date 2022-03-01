@@ -1,35 +1,20 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
 import { Company, CompanyDocument } from "../../data/schemas/company.schema";
 import { Model } from "mongoose";
-import { Password } from "../../data/schemas/password.schema";
-import { Person } from "../../data/schemas/person.schema";
+import { Project, ProjectDocument } from "../../data/schemas/project.schema";
 
 @Injectable()
-export class CompanyService {
-  constructor(@InjectModel(Company.name) private readonly model: Model<CompanyDocument>) {
+export class ProjectService {
+  constructor(@InjectModel(Project.name) private readonly model:Model<ProjectDocument>) {
   }
-
   fetch(id?: string) {
     if (id) return this.model.findById(id).exec();
-    return this.model.find()
-      .populate({
-        path: "projects",
-        populate: [
-          {
-            path: "passwords",
-            model: Password.name
-          }
-        ]
-      }).populate({
-        path: "projects",
-        populate: [
-          {
-            path: "guests",
-            model: Person.name
-          }
-        ]
-      }).exec();
+    return this.model.find().exec();
+  }
+
+  search(name: string) {
+    return this.model.find({name:{$regex: name}}).exec();
   }
 
   async fetchByUserId(id: string) {
